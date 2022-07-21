@@ -1,9 +1,7 @@
 //CSS
 import styles from "./Header.module.css";
 
-type Props = {}
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <header className={styles.header}>
         <h1>React + TypeScript</h1>
