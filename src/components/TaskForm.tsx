@@ -2,23 +2,33 @@
 import styles from './TaskForm.module.css'
 
 //Hooks
-import React, { ChangeEvent, useState, useEffect } from 'react'
+import React, { ChangeEvent, useState, useEffect, FormEvent } from 'react'
 
 //interfaces
 import { ITask } from '../interfaces/Task'
 
 interface Props {
     btnText: string
+    taskList: ITask[]
+    setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>
 }
 
-const TaskForm = ({ btnText } : Props) => {
+const TaskForm = ({ btnText, taskList, setTaskList } : Props) => {
 
     const [id, setId] = useState<number>(0)
     const [title, setTitle] = useState<string>("")
     const [difficulty, setDifficulty] = useState<number>(0)
 
-    const handleAddTask = () => {
+    const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
 
+        const id = Math.floor(Math.random() * 1000) 
+
+        const newTask: ITask = { id, title, difficulty }
+
+        setTaskList!([...taskList, newTask])
+        setTitle("")
+        setDifficulty(0)
     }
 
   return (
