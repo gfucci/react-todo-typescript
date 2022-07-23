@@ -19,7 +19,7 @@ const App = () => {
   const [taskList, setTaskList] = useState<ITask[]>([])
   const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null)
 
-  
+
 
   const deleteTask = (id: number) => {
     setTaskList(
@@ -45,6 +45,18 @@ const App = () => {
     setTaskToUpdate(task)
   }
 
+  const updateTask = (id: number, title: string, difficulty: number) => {
+
+    const updateTask: ITask = { id, title, difficulty }
+
+    const updatedTasks = taskList.map((task) => {
+      return updateTask.id === task.id ? updateTask : task
+    })
+
+    setTaskList(updatedTasks)
+    hideOrShowModal(false)
+  }
+
   return (
     <div>
       <Modal 
@@ -53,6 +65,7 @@ const App = () => {
             btnText='Editar' 
             taskList={taskList}
             task={taskToUpdate}
+            handleUpdate={updateTask}
           />
         }
 
