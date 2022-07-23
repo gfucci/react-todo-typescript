@@ -8,10 +8,11 @@ import { ITask } from '../interfaces/Task'
 import { BsFillPencilFill, BsFillTrashFill } from 'react-icons/bs'
 
 interface Props {
-  taskList: ITask[]
+  taskList: ITask[],
+  handleDelete(id: number): void
 }
 
-const TaskList = ({ taskList }: Props) => {
+const TaskList = ({ taskList, handleDelete }: Props) => {
   return (
     <>
       {taskList &&
@@ -24,7 +25,9 @@ const TaskList = ({ taskList }: Props) => {
               </div>
               <div className={styles.actions}>
                 <BsFillPencilFill />
-                <BsFillTrashFill />
+                <BsFillTrashFill 
+                  onClick={() => {handleDelete(task.id)}}
+                />
               </div>
             </div>
           ))
